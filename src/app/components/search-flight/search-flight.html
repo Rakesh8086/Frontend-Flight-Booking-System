@@ -1,0 +1,38 @@
+<div class="container mt-4">
+    <header class="jumbotron">
+        <h3>Search Flights</h3>
+    </header>
+    <div class="card p-4">
+        <form (ngSubmit)="searchFlights()">
+            <div class="mb-3">
+                <label for="fromPlace" class="form-label">Departure Place</label>
+                <input type="text" class="form-control" id="fromPlace" required [(ngModel)]="searchData.fromPlace"
+                    name="fromPlace">
+            </div>
+            <div class="mb-3">
+                <label for="toPlace" class="form-label">Arrival Place</label>
+                <input type="text" class="form-control" id="toPlace" required [(ngModel)]="searchData.toPlace"
+                    name="toPlace">
+            </div>
+            <div class="mb-3">
+                <label for="journeyDate" class="form-label">Journey Date</label>
+                <input type="date" class="form-control" id="journeyDate" required
+                    [(ngModel)]="searchData.journeyDate" name="journeyDate">
+            </div>
+            <button type="submit" class="btn btn-primary">Search Flights</button>
+        </form>
+        <hr>
+        <h5 class="card-title mt-4">Results</h5>
+        <p class="mt-3">
+            <strong>Status:</strong>
+            <span
+                [ngClass]="{'text-success': statusMessage.includes('Success'), 'text-danger': statusMessage.includes('Error')}">
+                {{ statusMessage }}
+            </span>
+        </p>
+        <div *ngIf="content">
+            <h6>Raw Response:</h6>
+            <pre>{{ content | json }}</pre>
+        </div>
+    </div>
+</div>
