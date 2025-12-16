@@ -1,46 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
-const AUTH_API = environment.apiUrl + 'authentication-service/api/auth/';
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+const AUTH_API = 'https://localhost:8082/authentication-service/api/auth/';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {
-
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'signin',
+      { username, password },
+      { withCredentials: true }
+    );
   }
 
   register(username: string, email: string, password: string): Observable<any> {
     return this.http.post(
       AUTH_API + 'signup',
-      {
-        username,
-        email,
-        password,
+      { username, 
+        email, 
+        password 
       },
-      httpOptions
-    );
-  }
-
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(
-      AUTH_API + 'signin',
-      {
-        username,
-        password,
-      },
-      httpOptions
+      { withCredentials: true }
     );
   }
 
   logout(): Observable<any> {
-    return this.http.post(AUTH_API + 'signout', { }, httpOptions);
+    return this.http.post(
+      AUTH_API + 'signout',
+      {},
+      { withCredentials: true }
+    );
   }
 }
