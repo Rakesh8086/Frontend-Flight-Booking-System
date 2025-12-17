@@ -1,15 +1,27 @@
-import { Routes } from '@angular/router';
-import { Login } from './components/login/login';
-import { Register } from './components/register/register';
-import { Profile } from './components/profile/profile';
-import { BoardAdmin } from './components/board-admin/board-admin';
-import { SearchFlightComponent } from './components/search-flight/search-flight';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-export const routes: Routes = [
-  { path: 'login', component: Login },
-  { path: 'register', component: Register },
-  { path: 'profile', component: Profile }, 
-  { path: 'add-flight', component: BoardAdmin }, 
-  { path: 'search', component: SearchFlightComponent }, 
-  { path: '', redirectTo: 'search', pathMatch: 'full' }
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+import { BoardUserComponent } from './board-user/board-user.component';
+import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
+import { BoardAdminComponent } from './board-admin/board-admin.component';
+import { SearchFlightComponent } from './search-flight/search-flight.component';
+import { AuthGuard } from './_guards/auth.guard';
+
+const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'user', component: BoardUserComponent },
+  { path: 'mod', component: BoardModeratorComponent },
+  { path: 'admin', component: BoardAdminComponent },
+  {
+    path: 'search-flights',
+    component: SearchFlightComponent,
+    canActivate: [AuthGuard]
+  }
 ];
