@@ -1,0 +1,97 @@
+<div class="container" style="max-width: 800px; margin: 0 auto;">
+
+  <h2 style="text-align: center;">Search Flights</h2>
+
+  <form #searchForm="ngForm"
+        (ngSubmit)="onSubmit()"
+        novalidate
+        style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+
+    <div style="width: 100%; text-align: center;">
+      <label>From</label><br />
+      <input
+        type="text"
+        name="fromPlace"
+        [(ngModel)]="form.fromPlace"
+        required
+        #fromPlace="ngModel"
+        style="width: 60%;"
+      />
+      <div *ngIf="fromPlace.invalid && fromPlace.touched" style="color: red;">
+        From place is required
+      </div>
+    </div>
+
+    <div style="width: 100%; text-align: center;">
+      <label>To</label><br />
+      <input
+        type="text"
+        name="toPlace"
+        [(ngModel)]="form.toPlace"
+        required
+        #toPlace="ngModel"
+        style="width: 60%;"
+      />
+      <div *ngIf="toPlace.invalid && toPlace.touched" style="color: red;">
+        To place is required
+      </div>
+    </div>
+
+    <div style="width: 100%; text-align: center;">
+      <label>Journey Date</label><br />
+      <input
+        type="date"
+        name="journeyDate"
+        [(ngModel)]="form.journeyDate"
+        required
+        #journeyDate="ngModel"
+        style="width: 60%;"
+      />
+      <div *ngIf="journeyDate.invalid && journeyDate.touched" style="color: red;">
+        Journey date is required
+      </div>
+    </div>
+
+    <button type="submit"
+            [disabled]="searchForm.invalid"
+            style="margin-top: 10px;">
+      Search
+    </button>
+  </form>
+
+  <div *ngIf="isSearchFailed"
+       class="error"
+       style="text-align: center; margin-top: 10px;">
+    {{ errorMessage }}
+  </div>
+
+  <table *ngIf="flights.length > 0"
+         border="1"
+         style="margin: 20px auto; width: 100%; text-align: center;">
+    <thead>
+      <tr>
+        <th>Airline</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Date</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+        <th>Price</th>
+        <th>Available Seats</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let flight of flights">
+        <td>{{ flight.airlineName }}</td>
+        <td>{{ flight.fromPlace }}</td>
+        <td>{{ flight.toPlace }}</td>
+        <td>{{ flight.scheduleDate }}</td>
+        <td>{{ flight.departureTime }}</td>
+        <td>{{ flight.arrivalTime }}</td>
+        <td>{{ flight.price }}</td>
+        <td>{{ flight.availableSeats }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

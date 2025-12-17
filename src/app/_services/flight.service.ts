@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SearchRequest } from '../_models/search-request';
+import { Flight } from '../_models/flight.model';
 
-const API_URL = 'http://localhost:8080/api/flight/'; 
+const FLIGHT_API = 'https://localhost:8082/flight-service/api/flight/';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlightService {
-  constructor(private http: HttpClient) { 
 
-  }
-  searchFlightsEndpoint(requestBody: SearchRequest): Observable<any> {
-    return this.http.post(
-      API_URL + 'search', 
-      requestBody, 
-      { responseType: 'text' }
-    );
+  constructor(private http: HttpClient) {}
+
+  searchFlights(fromPlace: string, toPlace: string, journeyDate: string): Observable<Flight[]> {
+    return this.http.post<Flight[]>(FLIGHT_API + 'search', {
+      fromPlace,
+      toPlace,
+      journeyDate
+    });
   }
 }
