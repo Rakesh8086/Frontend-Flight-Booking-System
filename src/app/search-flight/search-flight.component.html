@@ -1,5 +1,4 @@
 <div class="container" style="max-width: 800px; margin: 0 auto;">
-
   <h2 style="text-align: center;">Search Flights</h2>
 
   <form #searchForm="ngForm"
@@ -78,18 +77,24 @@
         <th>Arrival</th>
         <th>Price</th>
         <th>Available Seats</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let flight of flights">
-        <td>{{ flight.airlineName }}</td>
-        <td>{{ flight.fromPlace }}</td>
-        <td>{{ flight.toPlace }}</td>
-        <td>{{ flight.scheduleDate }}</td>
-        <td>{{ flight.departureTime }}</td>
-        <td>{{ flight.arrivalTime }}</td>
-        <td>{{ flight.price }}</td>
-        <td>{{ flight.availableSeats }}</td>
+        <td>{{flight.airlineName}}</td>
+        <td>{{flight.fromPlace}}</td>
+        <td>{{flight.toPlace}}</td>
+        <td>{{flight.scheduleDate}}</td>
+        <td>{{flight.departureTime}}</td>
+        <td>{{flight.arrivalTime }}</td>
+        <td>{{flight.price }}</td>
+        <td>{{flight.availableSeats }}</td>
+        <td>
+        <button (click)="bookTicket(flight)">
+          Book Ticket
+        </button>
+      </td>
       </tr>
     </tbody>
   </table>

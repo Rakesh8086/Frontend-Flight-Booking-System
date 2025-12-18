@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FlightService } from '../_services/flight.service';
 import { Flight } from '../_models/flight.model';
+import { BookingService } from '../_services/booking.service';
+import { Router } from '@angular/router';
+import { Booking } from '../_models/booking.model';
 
 @Component({
   selector: 'app-search-flight',
@@ -19,15 +22,16 @@ export class SearchFlightComponent {
   isSearchFailed = false;
   errorMessage = '';
 
-  constructor(private flightService: FlightService) {
+  constructor(private flightService: FlightService,
+    private bookingService: BookingService,
+    private router: Router
+  ) {
 
   }
-
   onSubmit(): void {
     const fromPlace = this.form.fromPlace;
     const toPlace = this.form.toPlace;
     const journeyDate = this.form.journeyDate;
-
     this.flightService.searchFlights(fromPlace, toPlace, journeyDate).subscribe({
       next: data => {
         this.flights = data;
@@ -38,6 +42,20 @@ export class SearchFlightComponent {
         this.isSearchFailed = true;
         this.flights = [];
       }
+    });
+  }
+  bookTicket(flight: any){
+    const bookingData: Booking = {
+      flightId: flight.id,
+      userName: '',
+      userEmail: '',
+      journeyDate: flight.scheduleDate,
+      mobileNumber: '',
+      mealOpted: '',
+      passengers: []
+    };
+    this.router.navigate(['/book-ticket'], {
+      state: { booking: bookingData }
     });
   }
 }

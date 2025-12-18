@@ -1,0 +1,20 @@
+<h2>Book Ticket</h2>
+<form (ngSubmit)="onSubmit()" #forms="ngForm">
+  <input name="userName" [(ngModel)]="form.userName"
+    placeholder="ussername">
+  <input type="email" name="userEmail" [(ngModel)]="form.userEmail"
+    placeholder="email">
+  <input name="mobileNumber" [(ngModel)]="form.mobileNumber"
+    placeholder="mobile">
+  <select name="mealOpted" [(ngModel)]="form.mealOpted">
+    <option value="Veg">Veg</option>
+    <option value="NonVeg">Non-Veg</option>
+  </select>
+  <button type="submit">Book</button>
+</form>
+<div *ngIf="isTicketBooked">
+  PNR: {{bookingPnr}}
+</div>
+<div *ngIf="errorMessage">
+  {{errorMessage}}
+</div>

@@ -15,6 +15,7 @@ import { BoardUserComponent } from './board-user/board-user.component';
 
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { SearchFlightComponent } from './search-flight/search-flight.component';
+import { BookTicketComponent } from './book-ticket/book-ticket.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SearchFlightComponent } from './search-flight/search-flight.component';
     BoardAdminComponent,
     BoardModeratorComponent,
     BoardUserComponent,
-    SearchFlightComponent
+    SearchFlightComponent,
+    BookTicketComponent
   ],
   imports: [
     BrowserModule,

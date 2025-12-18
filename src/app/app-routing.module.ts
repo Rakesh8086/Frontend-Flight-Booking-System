@@ -10,6 +10,7 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { SearchFlightComponent } from './search-flight/search-flight.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { BookTicketComponent } from './book-ticket/book-ticket.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -23,5 +24,9 @@ const routes: Routes = [
     path: 'search-flights',
     component: SearchFlightComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'book-ticket',
+    component: BookTicketComponent
   }
 ];
