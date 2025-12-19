@@ -22,4 +22,7 @@ export class BookingService{
     viewTicket(pnr:string): Observable<any>{
         return this.http.get<any>(`${BOOKING_API}ticket/${pnr}`);
     }
+    cancelTicket(pnr:string): Observable<any>{
+        return this.http.delete<any>(`${BOOKING_API}booking/cancel/${pnr}`)
+    }
 }

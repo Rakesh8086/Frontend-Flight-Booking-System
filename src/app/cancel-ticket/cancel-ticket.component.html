@@ -1,0 +1,13 @@
+<h2>Cancel Ticket using PNR</h2>
+<form (ngSubmit)="onSubmit()" #forms="ngForm">
+    <input name="pnr" [(ngModel)]="pnrField.pnr" placeholder="PNR">
+    <button type="submit">Cancel</button>
+</form>
+@if(isTicketNotCancelled) {
+  <div class="error" style="text-align: center;">
+    {{errorMessage}}
+  </div>
+}
+@else {
+    <p>Ticket cancelled</p>
+}

@@ -17,6 +17,7 @@ import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { SearchFlightComponent } from './search-flight/search-flight.component';
 import { BookTicketComponent } from './book-ticket/book-ticket.component';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
+import { CancelTicketComponent } from './cancel-ticket/cancel-ticket.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ViewTicketComponent } from './view-ticket/view-ticket.component';
     BoardUserComponent,
     SearchFlightComponent,
     BookTicketComponent,
-    ViewTicketComponent
+    ViewTicketComponent,
+    CancelTicketComponent
   ],
   imports: [
     BrowserModule,
