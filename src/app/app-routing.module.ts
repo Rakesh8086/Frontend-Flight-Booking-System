@@ -11,6 +11,7 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { SearchFlightComponent } from './search-flight/search-flight.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { BookTicketComponent } from './book-ticket/book-ticket.component';
+import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'book-ticket',
     component: BookTicketComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'view-ticket',
+    component: ViewTicketComponent,
     canActivate: [AuthGuard]
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' }

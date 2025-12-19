@@ -1,0 +1,42 @@
+<h2>View Ticket using PNR</h2>
+<form (ngSubmit)="onSubmit()" #forms="ngForm">
+    <input name="pnr" [(ngModel)]="form.pnr" placeholder="PNR">
+    <button type="submit">Search</button>
+</form>
+<div *ngIf="isTicketFetchedFailed"
+    class="error"
+    style="text-align: center; margin-top: 10px;">
+    {{errorMessage}}
+</div>
+<table *ngIf="bookingResponse"
+         border="1"
+         style="margin: 20px auto; width: 100%; text-align: center;">
+    <thead>
+      <tr>
+        <th>pnr</th>
+        <th>flightId</th>
+        <th>userName</th>
+        <th>userEmail</th>
+        <th>mobileNumber</th>
+        <th>journeyDate</th>
+        <th>BookingDate</th>
+        <th>mealOpted</th>
+        <th>Price</th>
+        <th>numberOfSeats</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{bookingResponse.pnr}}</td>
+        <td>{{bookingResponse.flightId}}</td>
+        <td>{{bookingResponse.userName}}</td>
+        <td>{{bookingResponse.userEmail}}</td>
+        <td>{{bookingResponse.mobileNumber}}</td>
+        <td>{{bookingResponse.journeyDate }}</td>
+        <td>{{bookingResponse.bookingDate }}</td>
+        <td>{{bookingResponse.mealOpted }}</td>
+        <td>{{bookingResponse.totalCost}}</td>
+        <td>{{bookingResponse.numberOfSeats }}</td>
+      </tr>
+    </tbody>
+</table>

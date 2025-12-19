@@ -19,4 +19,7 @@ export class BookingService{
               bookingData
             );
     }
+    viewTicket(pnr:string): Observable<any>{
+        return this.http.get<any>(`${BOOKING_API}ticket/${pnr}`);
+    }
 }
