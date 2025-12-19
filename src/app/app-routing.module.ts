@@ -27,6 +27,8 @@ const routes: Routes = [
   },
   {
     path: 'book-ticket',
-    component: BookTicketComponent
-  }
+    component: BookTicketComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
