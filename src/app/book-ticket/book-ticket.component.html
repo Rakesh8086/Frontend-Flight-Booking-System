@@ -10,6 +10,21 @@
     <option value="Veg">Veg</option>
     <option value="NonVeg">Non-Veg</option>
   </select>
+  <hr>
+  <label>No of Passengers</label>
+  <input type="number" min="1" name="passengerCount" [(ngModel)]="passengerCount" (change)="addPassengers()">
+  <hr>
+  <div *ngFor="let passenger of form.passengers; let i=index">
+    <h4>Passenger {{i+1}}</h4>
+    <input name="passengerName{{i}}" [(ngModel)]="passenger.name" placeholder="Name" required>
+    <input type="number" name="passengerAge{{i}}" [(ngModel)]="passenger.age" placeholder="Age" required>
+    <select name="passengerGender{{i}}" [(ngModel)]="passenger.gender">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+    <input name="seatNumber{{i}}" [(ngModel)]="passenger.seatNumber" placeholder="seat number" required>
+    <hr>
+  </div>
   <button type="submit">Book</button>
 </form>
 <div *ngIf="isTicketBooked">

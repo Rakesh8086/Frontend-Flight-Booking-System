@@ -8,6 +8,7 @@ import { Booking } from '../_models/booking.model';
   styleUrl: './book-ticket.component.css'
 })
 export class BookTicketComponent {
+  passengerCount = 1;
   form: Booking = {
     flightId: 0,
     userName: '',
@@ -15,12 +16,7 @@ export class BookTicketComponent {
     journeyDate: '',
     mobileNumber: '',
     mealOpted: '',
-    passengers: [{
-        name: 'AAA',
-        gender: 'MALE',
-        age: 25,
-        seatNumber: '1'
-      }]
+    passengers: []
   };
   bookingPnr = null;
   isTicketBooked = false;
@@ -30,6 +26,13 @@ export class BookTicketComponent {
   this.form = {...history.state.booking, 
       passengers: this.form.passengers
     };
+    this.addPassengers();
+  }
+  addPassengers(): void {
+    this.form.passengers = [];
+    for(let i=0;i<this.passengerCount;i++){
+      this.form.passengers.push({name: '', gender: '', age: 0, seatNumber:''});
+    }
   }
   onSubmit(): void {
     const flightId = this.form.flightId;
