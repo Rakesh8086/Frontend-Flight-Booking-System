@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BookingService } from '../_services/booking.service';
 import { BookingResponse } from '../_models/booking.respone.model';
+import { Passenger } from '../_models/passenger.model';
 
 @Component({
   selector: 'app-view-ticket',
@@ -19,7 +20,7 @@ export class ViewTicketComponent {
     mealOpted: '',
     totalCost: 0,
     journeyDate: '',
-    passengers: [],
+    passengers: [] as Passenger[]
   };
   bookingResponse: BookingResponse | null = null ;
   errorMessage = '';

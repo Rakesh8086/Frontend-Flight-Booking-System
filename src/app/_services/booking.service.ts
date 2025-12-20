@@ -23,6 +23,8 @@ export class BookingService{
         return this.http.get<any>(`${BOOKING_API}ticket/${pnr}`);
     }
     cancelTicket(pnr:string): Observable<any>{
-        return this.http.delete<any>(`${BOOKING_API}booking/cancel/${pnr}`)
+        return this.http.delete<string>(`${BOOKING_API}booking/cancel/${pnr}`,
+            {responseType: 'text' as 'json'}
+        )
     }
 }
