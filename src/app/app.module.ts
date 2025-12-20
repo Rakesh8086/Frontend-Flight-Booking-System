@@ -18,6 +18,7 @@ import { SearchFlightComponent } from './search-flight/search-flight.component';
 import { BookTicketComponent } from './book-ticket/book-ticket.component';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 import { CancelTicketComponent } from './cancel-ticket/cancel-ticket.component';
+import { ViewBookingHistoryComponent } from './view-booking-history/view-booking-history.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CancelTicketComponent } from './cancel-ticket/cancel-ticket.component';
     SearchFlightComponent,
     BookTicketComponent,
     ViewTicketComponent,
-    CancelTicketComponent
+    CancelTicketComponent,
+    ViewBookingHistoryComponent
   ],
   imports: [
     BrowserModule,

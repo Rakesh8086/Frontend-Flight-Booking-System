@@ -27,4 +27,7 @@ export class BookingService{
             {responseType: 'text' as 'json'}
         )
     }
+    viewHistory(email:string): Observable<any>{
+        return this.http.get<any>(`${BOOKING_API}booking/history/${email}`)
+    }
 }

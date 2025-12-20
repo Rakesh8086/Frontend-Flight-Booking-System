@@ -13,6 +13,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { BookTicketComponent } from './book-ticket/book-ticket.component';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 import { CancelTicketComponent } from './cancel-ticket/cancel-ticket.component';
+import { ViewBookingHistoryComponent } from './view-booking-history/view-booking-history.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -40,6 +41,11 @@ const routes: Routes = [
   {
     path: 'cancel-ticket',
     component: CancelTicketComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'view-booking-history',
+    component: ViewBookingHistoryComponent,
     canActivate: [AuthGuard]
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
