@@ -1,8 +1,15 @@
 <h2>Cancel Ticket using PNR</h2>
-<form (ngSubmit)="onSubmit()" #forms="ngForm">
-    <input name="pnr" [(ngModel)]="pnrField.pnr" placeholder="PNR">
-    <button type="submit">Cancel</button>
+<form (ngSubmit)="confirmDialog.showModal()" #forms="ngForm">
+    <input name="pnr" [(ngModel)]="pnrField.pnr" placeholder="PNR" required>
+    <button type="submit" [disabled]="!pnrField.pnr">Cancel</button>
 </form>
+<dialog #confirmDialog>
+  <p>Are you sure you want to cancel ticket for PNR: <b>{{pnrField.pnr}}</b>?</p>
+  <div style="text-align: center;">
+    <button (click)="confirmDialog.close()" style="margin-right: 10px;">No</button>
+    <button (click)="confirmDialog.close(); onSubmit()" style="margin-right: 10px;">Yes</button>
+  </div>
+</dialog>
 @if(isTicketNotCancelled) {
   <div class="error" style="text-align: center;">
     {{errorMessage}}
