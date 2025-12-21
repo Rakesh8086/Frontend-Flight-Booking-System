@@ -4,11 +4,14 @@ import { Flight } from '../_models/flight.model';
 import { BookingService } from '../_services/booking.service';
 import { Router } from '@angular/router';
 import { Booking } from '../_models/booking.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-search-flight',
   templateUrl: './search-flight.component.html',
-  styleUrls: ['./search-flight.component.css']
+  styleUrls: ['./search-flight.component.css'],
+  standalone: false,
+  // imports: [CommonModule]
 })
 export class SearchFlightComponent {
 

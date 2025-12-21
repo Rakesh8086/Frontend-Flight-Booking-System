@@ -15,7 +15,7 @@ import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 import { CancelTicketComponent } from './cancel-ticket/cancel-ticket.component';
 import { ViewBookingHistoryComponent } from './view-booking-history/view-booking-history.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -50,3 +50,8 @@ const routes: Routes = [
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

@@ -1,14 +1,4 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { App } from './app/app';
-import { provideHttpClient} from '@angular/common/http';
-import { provideRouter } from '@angular/router';
-import { authInterceptorProviders } from './app/_helpers/auth.interceptor';
-import { routes } from './app/app-routing.module'; // Import the routes array
-
-bootstrapApplication(App, {
-  providers: [
-    provideRouter(routes),     
-    provideHttpClient(),
-    ...authInterceptorProviders
-  ]
-}).catch(err => console.error(err));
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app/app.module';
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));

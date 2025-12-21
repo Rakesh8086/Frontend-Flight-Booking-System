@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 const USER_KEY = 'auth-user';
 
 @Injectable({
-  providedIn: 'root' // singleton class, only once instantiated
+  providedIn: 'root'
 })
-export class StorageService { // manages user object
+export class StorageService {
   constructor() {}
 
   clean(): void {
-    window.sessionStorage.clear(); // during logout
+    window.sessionStorage.clear();
   }
 
   public saveUser(user: any): void {
@@ -19,17 +19,19 @@ export class StorageService { // manages user object
 
   public getUser(): any {
     const user = window.sessionStorage.getItem(USER_KEY);
-    if(user) {
+    if (user) {
       return JSON.parse(user);
     }
+
     return null;
   }
 
   public isLoggedIn(): boolean {
     const user = window.sessionStorage.getItem(USER_KEY);
-    if(user) {
+    if (user) {
       return true;
     }
+
     return false;
   }
 }

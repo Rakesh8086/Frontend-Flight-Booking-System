@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { BookingResponse } from '../_models/booking.respone.model';
 import { BookingService } from '../_services/booking.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-view-booking-history',
   templateUrl: './view-booking-history.component.html',
-  styleUrl: './view-booking-history.component.css'
+  styleUrl: './view-booking-history.component.css',
+  standalone: false,
+  // imports: [CommonModule]
 })
 export class ViewBookingHistoryComponent {
   emailField: any = {

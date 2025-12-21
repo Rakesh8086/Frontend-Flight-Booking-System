@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import { BookingService } from '../_services/booking.service';
 import { BookingResponse } from '../_models/booking.respone.model';
 import { Passenger } from '../_models/passenger.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-view-ticket',
   templateUrl: './view-ticket.component.html',
-  styleUrl: './view-ticket.component.css'
+  styleUrl: './view-ticket.component.css',
+  standalone: false,
+  // imports: [CommonModule]
 })
 export class ViewTicketComponent {
   form : BookingResponse = {

@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { BookingService } from '../_services/booking.service';
 import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cancel-ticket',
   templateUrl: './cancel-ticket.component.html',
-  styleUrl: './cancel-ticket.component.css'
+  styleUrl: './cancel-ticket.component.css',
+  standalone: false,
+  // imports: [CommonModule]
 })
 export class CancelTicketComponent {
   pnrField: any = {

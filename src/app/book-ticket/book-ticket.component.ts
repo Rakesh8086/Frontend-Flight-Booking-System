@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { BookingService } from '../_services/booking.service';
 import { Booking } from '../_models/booking.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-book-ticket',
   templateUrl: './book-ticket.component.html',
-  styleUrl: './book-ticket.component.css'
+  styleUrl: './book-ticket.component.css',
+  standalone: false,
+  // imports: [CommonModule]
 })
 export class BookTicketComponent {
   passengerCount = 1;

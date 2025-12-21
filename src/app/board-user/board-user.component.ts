@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  standalone: false
+  selector: 'app-board-user',
+  templateUrl: './board-user.component.html',
+  standalone: false,
+  styleUrls: ['./board-user.component.css']
 })
-export class HomeComponent implements OnInit {
+export class BoardUserComponent implements OnInit {
   content?: string;
 
-  constructor(private userService: UserService) { 
-    
-  }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.getPublicContent().subscribe({
+    this.userService.getUserBoard().subscribe({
       next: data => {
         this.content = data;
       },
