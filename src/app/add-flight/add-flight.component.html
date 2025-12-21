@@ -1,0 +1,67 @@
+<div class="container d-flex justify-content-center mt-5">
+  <div class="col-md-6">
+    <div class="card p-4 shadow-sm">
+      <h4 class="text-center mb-4">Add Flight</h4>
+      <div *ngIf="!isFlightNotAdded" class="alert alert-success text-center mb-3">
+        Flight added (ID: {{ flightId }})
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger text-center mb-3">
+        {{errorMessage}}
+      </div>
+      <form #form="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="mb-3">
+          <label>Airline Name</label>
+          <input type="text" class="form-control" name="airlineName"
+                 [(ngModel)]="flightForm.airlineName" required>
+        </div>
+        <div class="mb-3">
+          <label>From</label>
+          <input type="text" class="form-control" name="fromPlace"
+                 [(ngModel)]="flightForm.fromPlace" required>
+        </div>
+        <div class="mb-3">
+          <label>To</label>
+          <input type="text" class="form-control" name="toPlace"
+                 [(ngModel)]="flightForm.toPlace" required>
+        </div>
+        <div class="mb-3">
+          <label>Schedule Date</label>
+          <input type="date" class="form-control" name="scheduleDate"
+                 [(ngModel)]="flightForm.scheduleDate" required>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <label>Departure Time</label>
+            <input type="time" class="form-control" name="departureTime"
+                   [(ngModel)]="flightForm.departureTime" required>
+          </div>
+          <div class="col">
+            <label>Arrival Time</label>
+            <input type="time" class="form-control" name="arrivalTime"
+                   [(ngModel)]="flightForm.arrivalTime" required>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col">
+            <label>Price</label>
+            <input type="number" class="form-control" name="price"
+                   [(ngModel)]="flightForm.price" min="0" required>
+          </div>
+          <div class="col">
+            <label>Total Seats</label>
+            <input type="number" class="form-control" name="totalSeats"
+                   [(ngModel)]="flightForm.totalSeats" min="1" required>
+          </div>
+          <div class="col">
+            <label>Available Seats</label>
+            <input type="number" class="form-control" name="availableSeats"
+                   [(ngModel)]="flightForm.availableSeats" min="1" required>
+          </div>
+        </div>
+        <button type="submit" [disabled]="form.invalid">
+          Add Flight
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

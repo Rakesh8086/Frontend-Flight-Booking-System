@@ -19,4 +19,9 @@ export class FlightService {
       journeyDate
     });
   }
+  addFlight(flight: Flight): Observable<any>{
+    return this.http.post<any>(FLIGHT_API + 'airline/inventory/add',
+      flight
+    );
+  }
 }

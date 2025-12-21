@@ -1,4 +1,5 @@
 export interface Flight {
+  // addFlight(flightForm: Flight): unknown;
   id: number;
   airlineName: string;
   fromPlace: string;

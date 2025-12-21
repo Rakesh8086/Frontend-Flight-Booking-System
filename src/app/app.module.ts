@@ -20,6 +20,7 @@ import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 import { CancelTicketComponent } from './cancel-ticket/cancel-ticket.component';
 import { ViewBookingHistoryComponent } from './view-booking-history/view-booking-history.component';
 import { CommonModule } from '@angular/common';
+import { AddFlightComponent } from './add-flight/add-flight.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CommonModule } from '@angular/common';
     BookTicketComponent,
     ViewTicketComponent,
     CancelTicketComponent,
-    ViewBookingHistoryComponent
+    ViewBookingHistoryComponent,
+    AddFlightComponent
   ],
   imports: [
     BrowserModule,

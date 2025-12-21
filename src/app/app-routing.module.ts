@@ -14,6 +14,7 @@ import { BookTicketComponent } from './book-ticket/book-ticket.component';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 import { CancelTicketComponent } from './cancel-ticket/cancel-ticket.component';
 import { ViewBookingHistoryComponent } from './view-booking-history/view-booking-history.component';
+import { AddFlightComponent } from './add-flight/add-flight.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -46,6 +47,11 @@ export const routes: Routes = [
   {
     path: 'view-booking-history',
     component: ViewBookingHistoryComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'add-flight',
+    component: AddFlightComponent,
     canActivate: [AuthGuard]
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
