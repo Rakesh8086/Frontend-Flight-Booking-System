@@ -21,6 +21,7 @@ import { CancelTicketComponent } from './cancel-ticket/cancel-ticket.component';
 import { ViewBookingHistoryComponent } from './view-booking-history/view-booking-history.component';
 import { CommonModule } from '@angular/common';
 import { AddFlightComponent } from './add-flight/add-flight.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AddFlightComponent } from './add-flight/add-flight.component';
     ViewTicketComponent,
     CancelTicketComponent,
     ViewBookingHistoryComponent,
-    AddFlightComponent
+    AddFlightComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

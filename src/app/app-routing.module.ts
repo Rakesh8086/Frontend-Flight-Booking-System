@@ -15,6 +15,7 @@ import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 import { CancelTicketComponent } from './cancel-ticket/cancel-ticket.component';
 import { ViewBookingHistoryComponent } from './view-booking-history/view-booking-history.component';
 import { AddFlightComponent } from './add-flight/add-flight.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -52,6 +53,11 @@ export const routes: Routes = [
   {
     path: 'add-flight',
     component: AddFlightComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'change-password',
+    component: ChangePasswordComponent,
     canActivate: [AuthGuard]
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
