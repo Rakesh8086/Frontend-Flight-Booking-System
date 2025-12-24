@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BookingResponse } from '../_models/booking.respone.model';
 import { BookingService } from '../_services/booking.service';
 import { CommonModule } from '@angular/common';
@@ -10,28 +10,35 @@ import { CommonModule } from '@angular/common';
   standalone: false,
   // imports: [CommonModule]
 })
-export class ViewBookingHistoryComponent {
-  emailField: any = {
-    email: ''
-  };
+export class ViewBookingHistoryComponent implements OnInit { 
   errorMessage = '';
   isHistoryNotFetched = true;
   bookingHistory: BookingResponse[] = [];
   
-  constructor(private bookingService: BookingService){
+  constructor(private bookingService: BookingService) {
 
   }
-  onSubmit(): void{
-    const emailId = this.emailField.email;
-    this.bookingService.viewHistory(emailId).subscribe({
-      next: (response:any)=>{
+  ngOnInit(): void {
+    this.onSubmit();
+  }
+  onSubmit(): void {
+    this.bookingService.viewHistory().subscribe({
+      next: (response: any) => {
+        // console.log(response);
         this.bookingHistory = response;
         this.isHistoryNotFetched = false;
+        this.errorMessage = ''; 
       },
-      error: err=>{
-        this.errorMessage = err.error;
+      error: err => {
+        // console.error(err);
+        if(typeof err.error === 'string'){
+          this.errorMessage = err.error
+        }
+        else{
+          this.errorMessage = 'Failed to load history'
+        }
         this.isHistoryNotFetched = true;
       }
-    })
+    });
   }
 }

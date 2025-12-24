@@ -1,42 +1,39 @@
-<h2>View Booking History</h2>
-<form (ngSubmit)="onSubmit()" #form="ngForm">
-    <input name="pnr" [(ngModel)]="emailField.email" placeholder="Email">
-    <button type="submit">Search</button>
-</form>
-<div *ngIf="isHistoryNotFetched"
-    class="error"
-    style="text-align: center; margin-top: 10px;">
+<h2>My Booking History</h2>
+<div *ngIf="errorMessage" class="alert alert-danger" style="color: red; text-align: center;">
     {{errorMessage}}
 </div>
-<table *ngIf="bookingHistory.length > 0"
+<div *ngIf="!isHistoryNotFetched && bookingHistory.length === 0" style="text-align: center">
+    No bookings found.
+</div>
+<table *ngIf="!isHistoryNotFetched && bookingHistory.length > 0"
     border="1"
     style="margin: 20px auto; width: 100%; text-align: center;">
     <thead>
       <tr>
-        <th>pnr</th>
-        <th>flightId</th>
-        <th>userName</th>
-        <th>userEmail</th>
-        <th>mobileNumber</th>
-        <th>journeyDate</th>
-        <th>BookingDate</th>
-        <th>mealOpted</th>
+        <th>PNR</th>
+        <th>Flight ID</th>
+        <th>User Name</th>
+        <th>User Email</th>
+        <th>Mobile</th>
+        <th>Journey Date</th>
+        <th>Booking Date</th>
+        <th>Meal</th>
         <th>Price</th>
-        <th>numberOfSeats</th>
+        <th>Seats</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let booking of bookingHistory">
-        <td>{{booking.pnr}}</td>
+        <td><strong>{{booking.pnr}}</strong></td>
         <td>{{booking.flightId}}</td>
         <td>{{booking.userName}}</td>
         <td>{{booking.userEmail}}</td>
         <td>{{booking.mobileNumber}}</td>
-        <td>{{booking.journeyDate }}</td>
-        <td>{{booking.bookingDate }}</td>
-        <td>{{booking.mealOpted }}</td>
-        <td>{{booking.totalCost}}</td>
-        <td>{{booking.numberOfSeats }}</td>
+        <td>{{booking.journeyDate}}</td> 
+        <td>{{booking.bookingDate}}</td>       
+        <td>{{booking.mealOpted}}</td>
+        <td>{{booking.totalCost}}</td>       
+        <td>{{booking.numberOfSeats}}</td>
       </tr>
     </tbody>
 </table>
