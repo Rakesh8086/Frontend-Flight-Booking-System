@@ -1,39 +1,56 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { email } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-change-password',
-  standalone: false,
   templateUrl: './change-password.component.html',
-  styleUrl: './change-password.component.css',
+  styleUrls: ['./change-password.component.css'],
+  standalone: false
 })
 export class ChangePasswordComponent {
-  changePasswordForm: any = {
-    email: '',
-    existingPassword: '',
-    newPassword: ''
-  };
-  errorMessage = '';
-  isPasswordNotChanged = true;
-  response = '';  
-  constructor(private authService: AuthService){
 
-  }
+  form: any = {
+    email: null,
+    existingPassword: null,
+    newPassword: null
+  };
+
+  isSuccessful = false;
+  isChangeFailed = false;
+  fieldErrors: any = {};
+  serviceError = '';
+
+  constructor(
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
   onSubmit(): void {
-    const email = this.changePasswordForm.email;
-    const existingPassword = this.changePasswordForm.existingPassword;
-    const newPassword = this.changePasswordForm.newPassword;
+    this.fieldErrors = {};
+    this.serviceError = '';
+    this.isChangeFailed = false;
+
+    const { email, existingPassword, newPassword } = this.form;
+
     this.authService.changePassword(email, existingPassword, newPassword).subscribe({
-        next: message => {
-          this.response = message;
-          this.isPasswordNotChanged = false;
-        },
-        error: err => {
-          this.errorMessage = err.error;
-          this.isPasswordNotChanged = true;
+      next: data => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isChangeFailed = false;
+      },
+      error: err => {
+        this.isChangeFailed = true;
+        this.fieldErrors = {};
+        this.serviceError = '';
+        if(typeof err.error === 'string') {
+          this.serviceError = err.error;
         }
+        else if(typeof err.error === 'object') {
+          this.fieldErrors = err.error;
+        }
+        this.cdr.detectChanges();
       }
-    );
+    });
   }
 }
