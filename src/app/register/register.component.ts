@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 
 @Component({
@@ -15,13 +15,15 @@ export class RegisterComponent {
   };
   isSuccessful = false;
   isSignUpFailed = false;
-  errorMessage = '';
+  fieldErrors: any = {};
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private cdr: ChangeDetectorRef){ 
 
+  }
   onSubmit(): void {
+    this.fieldErrors = {};
+    this.isSignUpFailed = false;
     const { username, email, password } = this.form;
-
     this.authService.register(username, email, password).subscribe({
       next: data => {
         console.log(data);
@@ -29,8 +31,9 @@ export class RegisterComponent {
         this.isSignUpFailed = false;
       },
       error: err => {
-        this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
+        this.fieldErrors = err.error || {};
+        this.cdr.detectChanges();
       }
     });
   }
