@@ -21,16 +21,13 @@ export class ChangePasswordComponent {
   fieldErrors: any = {};
   serviceError = '';
 
-  constructor(
-    private authService: AuthService,
-    private cdr: ChangeDetectorRef
-  ) {}
+  constructor(private authService: AuthService, private cdr: ChangeDetectorRef) {
 
+  }
   onSubmit(): void {
     this.fieldErrors = {};
     this.serviceError = '';
     this.isChangeFailed = false;
-
     const { email, existingPassword, newPassword } = this.form;
 
     this.authService.changePassword(email, existingPassword, newPassword).subscribe({
@@ -43,13 +40,24 @@ export class ChangePasswordComponent {
         this.isChangeFailed = true;
         this.fieldErrors = {};
         this.serviceError = '';
-        if(typeof err.error === 'string') {
-          this.serviceError = err.error;
+        if(typeof err.error === 'string'){
+          try {
+            const parsed = JSON.parse(err.error);
+            if(typeof parsed === 'object'){
+              this.fieldErrors = parsed;
+            } 
+            else {
+              this.serviceError = err.error;
+            }
+          } 
+          catch {
+            this.serviceError = err.error;
+          }
         }
-        else if(typeof err.error === 'object') {
+        else if(typeof err.error === 'object'){
           this.fieldErrors = err.error;
         }
-        this.cdr.detectChanges();
+        this.cdr.detectChanges(); 
       }
     });
   }
