@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { BookingService } from '../_services/booking.service';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,7 @@ export class CancelTicketComponent {
   response = 'Ticket Cancelled'
 
   constructor(private bookingService: BookingService,
-    private http: HttpClient
+    private http: HttpClient, private cdr: ChangeDetectorRef
   ) {
     
   }
@@ -29,10 +29,12 @@ export class CancelTicketComponent {
       next: (response:any)=>{
         this.isTicketNotCancelled = false;
         this.errorMessage = response; 
+        this.cdr.detectChanges();
       },
       error: err=>{
         this.errorMessage = err.error;
         this.isTicketNotCancelled = true;
+        this.cdr.detectChanges();
       }
     })
   }
