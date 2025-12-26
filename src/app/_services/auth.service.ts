@@ -44,7 +44,7 @@ export class AuthService {
         newPassword
       },
       {
-        withCredentials: true,
+        // withCredentials: true,
         responseType: 'text' as 'json'
       },
     );

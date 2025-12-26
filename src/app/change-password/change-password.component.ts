@@ -11,9 +11,9 @@ import { email } from '@angular/forms/signals';
 export class ChangePasswordComponent {
 
   form: any = {
-    email: null,
-    existingPassword: null,
-    newPassword: null
+    email: '',
+    existingPassword: '',
+    newPassword: ''
   };
 
   isSuccessful = false;
@@ -22,7 +22,8 @@ export class ChangePasswordComponent {
   serviceError = '';
 
   constructor(private authService: AuthService, private cdr: ChangeDetectorRef) {
-
+    // const nav = history.state;
+    // if(nav?.username) this.form.email = nav.username;
   }
   onSubmit(): void {
     this.fieldErrors = {};
@@ -57,7 +58,7 @@ export class ChangePasswordComponent {
         else if(typeof err.error === 'object'){
           this.fieldErrors = err.error;
         }
-        this.cdr.detectChanges(); 
+        // this.cdr.detectChanges(); 
       }
     });
   }

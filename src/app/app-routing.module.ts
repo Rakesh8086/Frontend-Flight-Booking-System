@@ -58,7 +58,7 @@ export const routes: Routes = [
   {
     path: 'change-password',
     component: ChangePasswordComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];

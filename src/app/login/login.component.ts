@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { StorageService } from '../_services/storage.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,9 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private storageService: StorageService) { }
+  constructor(private authService: AuthService, 
+    private storageService: StorageService,
+    private router: Router) { }
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
@@ -40,8 +43,13 @@ export class LoginComponent implements OnInit {
         this.reloadPage();
       },
       error: err => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
+        if(err.error?.message?.includes('Password expired')) {
+          this.router.navigate(['/change-password'], 
+            { state: { username: this.form.username } });
+        } 
+        else {
+          this.errorMessage = err.error?.message || 'Login failed';
+        }
       }
     });
   }
