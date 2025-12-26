@@ -1,35 +1,68 @@
-<h2>Book Ticket</h2>
-<form (ngSubmit)="onSubmit()" #forms="ngForm">
-  <input name="userName" [(ngModel)]="form.userName"
-    placeholder="ussername">
-  <input type="email" name="userEmail" [(ngModel)]="form.userEmail"
-    placeholder="email">
-  <input name="mobileNumber" [(ngModel)]="form.mobileNumber"
-    placeholder="mobile">
-  <select name="mealOpted" [(ngModel)]="form.mealOpted">
-    <option value="Veg">Veg</option>
-    <option value="NonVeg">Non-Veg</option>
-  </select>
-  <hr>
-  <label>No of Passengers</label>
-  <input type="number" min="1" name="passengerCount" [(ngModel)]="passengerCount" (change)="addPassengers()">
-  <hr>
-  <div *ngFor="let passenger of form.passengers; let i=index">
-    <h4>Passenger {{i+1}}</h4>
-    <input name="passengerName{{i}}" [(ngModel)]="passenger.name" placeholder="Name" required>
-    <input type="number" name="passengerAge{{i}}" [(ngModel)]="passenger.age" placeholder="Age" required>
-    <select name="passengerGender{{i}}" [(ngModel)]="passenger.gender">
-      <option value="Male">Male</option>
-      <option value="Female">Female</option>
-    </select>
-    <input name="seatNumber{{i}}" [(ngModel)]="passenger.seatNumber" placeholder="seat number" required>
-    <hr>
+<div class="container d-flex justify-content-center align-items-start min-vh-100 mt-5">
+  <div class="col-md-6">
+    <div class="card p-4 shadow-sm">
+      <h4 class="text-center mb-4">Book Ticket</h4>
+      <form (ngSubmit)="onSubmit()" novalidate>
+        <div class="mb-3">
+          <label>User Name</label>
+          <input class="form-control" name="userName" [(ngModel)]="form.userName"
+                 [ngClass]="{'is-invalid': fieldErrors.userName}">
+          <div class="invalid-feedback">{{ fieldErrors.userName }}</div>
+        </div>
+        <div class="mb-3">
+          <label>Email</label>
+          <input type="email" class="form-control" name="userEmail"
+                 [(ngModel)]="form.userEmail"
+                 [ngClass]="{'is-invalid': fieldErrors.userEmail}">
+          <div class="invalid-feedback">{{ fieldErrors.userEmail }}</div>
+        </div>
+        <div class="mb-3">
+          <label>Mobile</label>
+          <input class="form-control" name="mobileNumber"
+                 [(ngModel)]="form.mobileNumber"
+                 [ngClass]="{'is-invalid': fieldErrors.mobileNumber}">
+          <div class="invalid-feedback">{{ fieldErrors.mobileNumber }}</div>
+        </div>
+        <div class="mb-3">
+          <label>Meal Preference</label>
+          <select class="form-select" name="mealOpted" [(ngModel)]="form.mealOpted"
+                  [ngClass]="{'is-invalid': fieldErrors.mealOpted}">
+            <option value="">Select</option><option value="Veg">Veg</option><option value="NonVeg">Non-Veg</option>
+          </select>
+          <div class="invalid-feedback">{{ fieldErrors.mealOpted }}</div>
+        </div>
+        <hr>
+        <div class="mb-3">
+          <label>No of Passengers</label>
+          <input type="number" min="1" class="form-control" name="passengerCount"
+                 [(ngModel)]="passengerCount" (change)="addPassengers()">
+        </div>
+        <div *ngFor="let passenger of form.passengers; let i=index" class="border rounded p-3 mb-3">
+          <h6 class="mb-2">Passenger {{ i + 1 }}</h6>
+          <input class="form-control mb-1" placeholder="Name"
+                 name="passengerName{{i}}" [(ngModel)]="passenger.name"
+                 [ngClass]="{'is-invalid': fieldErrors['passengers['+i+'].name']}">
+          <div class="invalid-feedback">{{ fieldErrors['passengers['+i+'].name'] }}</div>
+          <input type="number" class="form-control mb-1" placeholder="Age"
+                 name="passengerAge{{i}}" [(ngModel)]="passenger.age"
+                 [ngClass]="{'is-invalid': fieldErrors['passengers['+i+'].age']}">
+          <div class="invalid-feedback">{{ fieldErrors['passengers['+i+'].age'] }}</div>
+          <select class="form-select mb-1" name="passengerGender{{i}}"
+                  [(ngModel)]="passenger.gender"
+                  [ngClass]="{'is-invalid': fieldErrors['passengers['+i+'].gender']}">
+            <option value="">Gender</option><option value="Male">Male</option><option value="Female">Female</option>
+          </select>
+          <div class="invalid-feedback">{{ fieldErrors['passengers['+i+'].gender'] }}</div>
+          <input class="form-control" placeholder="Seat Number"
+                 name="seatNumber{{i}}" [(ngModel)]="passenger.seatNumber"
+                 [ngClass]="{'is-invalid': fieldErrors['passengers['+i+'].seatNumber']}">
+          <div class="invalid-feedback">{{ fieldErrors['passengers['+i+'].seatNumber'] }}</div>
+        </div>
+        <button class="btn btn-primary w-100">Book Ticket</button>
+      </form>
+      <div *ngIf="isTicketBooked" class="alert alert-success text-center mt-3">
+        PNR: {{ bookingPnr }}
+      </div>
+    </div>
   </div>
-  <button type="submit">Book</button>
-</form>
-<div *ngIf="isTicketBooked">
-  PNR: {{bookingPnr}}
-</div>
-<div *ngIf="errorMessage">
-  {{errorMessage}}
 </div>

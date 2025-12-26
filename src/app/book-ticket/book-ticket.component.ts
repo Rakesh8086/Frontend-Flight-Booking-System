@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { BookingService } from '../_services/booking.service';
 import { Booking } from '../_models/booking.model';
 import { CommonModule } from '@angular/common';
@@ -23,9 +23,11 @@ export class BookTicketComponent {
   };
   bookingPnr = null;
   isTicketBooked = false;
-  errorMessage = '';
+  fieldErrors: any = {};
 
-  constructor(private bookingService: BookingService) {
+  constructor(private bookingService: BookingService, 
+    private cdr: ChangeDetectorRef
+  ) {
   this.form = {...history.state.booking, 
       passengers: this.form.passengers
     };
@@ -45,8 +47,22 @@ export class BookTicketComponent {
         this.isTicketBooked = true;
       },
       error: err => {
-        this.errorMessage = err.error?.message || 'Booking done';
         this.isTicketBooked = false;
+        this.fieldErrors = {};
+        if(typeof err.error === 'string') {
+          try {
+            const parsed = JSON.parse(err.error);
+            if(typeof parsed === 'object') {
+              this.fieldErrors = parsed;
+            }
+          } catch {
+            // this.serviceError = err.error;
+          }
+        }
+        else if(typeof err.error === 'object') {
+          this.fieldErrors = err.error;
+        }
+        this.cdr.detectChanges();
       }
     });
   }
